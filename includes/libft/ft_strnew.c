@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/05 05:46:31 by cbinet            #+#    #+#             */
+/*   Updated: 2016/11/19 13:05:55 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+char	*ft_strnew(size_t size)
 {
-	int	i;
+	char	*str;
+	size_t	i;
 
 	i = 0;
-	while (*format)
+	size++;
+	if ((str = (char *)malloc(size * sizeof(*str))) == NULL)
+		return (NULL);
+	while (i < size)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		str[i] = '\0';
+		i++;
 	}
-	ft_putbuf(buffer);
+	return (str);
 }

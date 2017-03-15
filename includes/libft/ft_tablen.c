@@ -1,35 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2017/01/03 14:20:21 by cbinet            #+#    #+#             */
+/*   Updated: 2017/01/04 17:43:11 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+int		ft_witablen(int *tab, int precision)
 {
-	int	i;
+	int		i;
+	int		j;
+	int		nb;
 
 	i = 0;
-	while (*format)
+	j = 0;
+	while (*tab)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
+		nb = *tab;
+		while (nb > 1)
 		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
+			nb /= 64;
+			i++;
 		}
+		tab++;
+		if (i <= precision)
+			j = i;
 	}
-	ft_putbuf(buffer);
+	return (j);
+}
+
+int		ft_wtablen(int *tab)
+{
+	int		i;
+	int		nb;
+
+	i = 0;
+	while (*tab)
+	{
+		nb = *tab;
+		while (nb)
+		{
+			nb /= 64;
+			i++;
+		}
+		tab++;
+	}
+	return (i);
 }

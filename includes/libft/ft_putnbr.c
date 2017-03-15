@@ -1,35 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/04 22:22:01 by cbinet            #+#    #+#             */
+/*   Updated: 2016/12/11 16:12:06 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+void	ft_putnbr(int n)
 {
-	int	i;
-
-	i = 0;
-	while (*format)
+	if (n == -2147483648)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		n = 147483648;
+		ft_putstr("-2");
 	}
-	ft_putbuf(buffer);
+	if (n < 0)
+	{
+		n *= -1;
+		ft_putchar('-');
+	}
+	if (n >= 10)
+		ft_putnbr(n / 10);
+	ft_putchar(n % 10 + '0');
+}
+
+void	ft_putunbr(unsigned int n)
+{
+	if (n >= 10)
+		ft_putunbr(n / 10);
+	ft_putchar(n % 10 + '0');
+}
+
+void	ft_putlunbr(unsigned long int n)
+{
+	if (n >= 10)
+		ft_putlunbr(n / 10);
+	ft_putchar(n % 10 + '0');
 }

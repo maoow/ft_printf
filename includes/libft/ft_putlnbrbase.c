@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_putlnbrbase.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/12/10 16:31:04 by cbinet            #+#    #+#             */
+/*   Updated: 2016/12/10 17:09:11 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+void	ft_putlnbrbase(unsigned long int nb, char *base)
 {
-	int	i;
+	unsigned long int nbase;
 
-	i = 0;
-	while (*format)
-	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
-	}
-	ft_putbuf(buffer);
+	nbase = ft_strlen(base);
+	if (nb >= nbase)
+		ft_putlnbrbase(nb / nbase, base);
+	ft_putchar(base[nb % nbase]);
+}
+
+void	ft_putloctal(unsigned long int nb)
+{
+	ft_putlnbrbase(nb, "012345678");
+}
+
+void	ft_putlhexa(unsigned int nb)
+{
+	ft_putnbrbase(nb, "0123456789ABCDEF");
 }

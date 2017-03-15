@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/03 09:54:55 by cbinet            #+#    #+#             */
+/*   Updated: 2016/11/19 13:05:45 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
-
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	while (*format)
+	while (*s1 == *s2 && (*s1 || *s2))
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		s1++;
+		s2++;
 	}
-	ft_putbuf(buffer);
+	i = (unsigned char)*s1 - (unsigned char)*s2;
+	return ((int)i);
 }

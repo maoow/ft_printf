@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_lstreplace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/12/05 15:53:15 by cbinet            #+#    #+#             */
+/*   Updated: 2016/12/08 18:33:35 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+void		ft_lstreplace(t_list **lst, t_list *new, int place)
 {
-	int	i;
+	t_list	*tmp;
+	t_list	*prev;
 
-	i = 0;
-	while (*format)
+	if (place == 0)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		free((*lst)->content);
+		free(*lst);
+		*lst = new;
 	}
-	ft_putbuf(buffer);
+	else
+	{
+		tmp = *lst;
+		while (place)
+		{
+			prev = tmp;
+			tmp = tmp->next;
+			place--;
+		}
+		prev->next = new;
+		new->next = tmp->next;
+		free(tmp->content);
+		free(tmp);
+	}
 }

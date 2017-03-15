@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/10 19:10:00 by cbinet            #+#    #+#             */
+/*   Updated: 2016/11/19 13:05:45 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int	i;
+	char	buf[size];
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (*format)
+	while (i < size && dst[i])
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		buf[i] = dst[i];
+		i++;
 	}
-	ft_putbuf(buffer);
+	if (i == size)
+		return (i + ft_strlen((char *)src));
+	j = 0;
+	while (src[j] && i + j < size - 1)
+	{
+		buf[i + j] = src[j];
+		j++;
+	}
+	buf[i + j] = '\0';
+	j = 0;
+	ft_strcpy(dst, buf);
+	return (i + ft_strlen((char*)src));
 }

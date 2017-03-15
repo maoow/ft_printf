@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/04 23:49:37 by cbinet            #+#    #+#             */
+/*   Updated: 2016/11/19 13:05:45 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	int	i;
+	int		i;
+	int		len;
+	char	*str;
 
-	i = 0;
-	while (*format)
+	if (s)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
 		i = 0;
-		if (*format)
+		len = 0;
+		while (s[len])
+			len++;
+		if ((str = (char *)malloc(len + 1 * sizeof(*str))) == NULL)
+			return (NULL);
+		while (s[i])
 		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
+			str[i] = (*f)(s[i]);
+			i++;
 		}
+		str[i] = '\0';
+		return (str);
 	}
-	ft_putbuf(buffer);
+	return (NULL);
 }

@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_getcursor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2017/01/07 22:09:16 by cbinet            #+#    #+#             */
+/*   Updated: 2017/01/07 23:24:37 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+char	*ft_getcursor(t_buf_f *buffer, va_list ap, char *format)
 {
-	int	i;
+	int		*i;
 
-	i = 0;
-	while (*format)
-	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
-	}
-	ft_putbuf(buffer);
+	i = va_arg(ap, int *);
+	*i = (int)(buffer->cursor + buffer->total);
+	return (format);
 }

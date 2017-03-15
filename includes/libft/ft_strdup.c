@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/03 11:32:17 by cbinet            #+#    #+#             */
+/*   Updated: 2016/12/15 21:41:02 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+char	*ft_strdup(char *src)
 {
-	int	i;
+	int		i;
+	char	*str;
 
+	if (!src)
+		return (NULL);
+	i = ft_strlen(src);
+	if ((str = (char *)malloc((i + 1) * sizeof(*str))) == NULL)
+		return (NULL);
 	i = 0;
-	while (*format)
+	while (src[i])
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		str[i] = src[i];
+		i++;
 	}
-	ft_putbuf(buffer);
+	str[i] = '\0';
+	return (str);
 }

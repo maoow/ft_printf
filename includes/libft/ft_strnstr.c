@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/10 13:16:33 by cbinet            #+#    #+#             */
+/*   Updated: 2016/11/19 13:05:55 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+char	*ft_strnstr(const char *big, const char *little, size_t n)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
 
-	i = 0;
-	while (*format)
+	if (!*little)
+		return ((char *)big);
+	j = 0;
+	while (big[j] && j < n)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
 		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		while (big[j] != *little && big[j] && j < n)
+			j++;
+		while (big[i + j] == little[i] && little[i]
+				&& big[i + j] && (j + i) < n)
+			i++;
+		if (little[i] == '\0')
+			return ((char *)&big[j]);
+		if (big[j])
+			j++;
 	}
-	ft_putbuf(buffer);
+	return (NULL);
 }

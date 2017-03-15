@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/07 11:50:37 by cbinet            #+#    #+#             */
+/*   Updated: 2016/11/19 13:05:56 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+char	*ft_strstr(const char *big, const char *little)
 {
-	int	i;
+	int i;
 
-	i = 0;
-	while (*format)
+	if (!*little)
+		return ((char *)big);
+	while (*big)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
 		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		while (*big != *little && *big)
+			big++;
+		while (big[i] == little[i] && little[i] && big[i])
+			i++;
+		if (little[i] == '\0')
+			return ((char *)big);
+		if (*big)
+			big++;
 	}
-	ft_putbuf(buffer);
+	return (NULL);
 }

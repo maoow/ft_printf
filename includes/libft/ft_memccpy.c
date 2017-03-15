@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/09 17:49:31 by cbinet            #+#    #+#             */
+/*   Updated: 2016/11/16 12:58:25 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	int	i;
+	size_t i;
 
 	i = 0;
-	while (*format)
+	if (n == 0)
+		return (NULL);
+	while (*(unsigned char *)src != (unsigned char)c && i < n)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		*(unsigned char *)dst = *(unsigned char *)src;
+		src++;
+		dst++;
+		i++;
 	}
-	ft_putbuf(buffer);
+	if (i < n && *(unsigned char *)src == (unsigned char)c)
+	{
+		*(unsigned char *)dst = *(unsigned char *)src;
+		dst++;
+		return (dst);
+	}
+	return (NULL);
 }

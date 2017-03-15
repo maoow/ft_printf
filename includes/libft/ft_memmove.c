@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/09 17:53:55 by cbinet            #+#    #+#             */
+/*   Updated: 2016/11/12 21:15:54 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+static void	*ft_rmemcpy(void *dst, const void *src, size_t n)
 {
-	int	i;
+	size_t	i;
+	void	*str;
 
-	i = 0;
-	while (*format)
+	str = dst;
+	i = n;
+	str = &str[n];
+	src = &src[n];
+	while (i > 0)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
-		i = 0;
-		if (*format)
-		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
-		}
+		i--;
+		src--;
+		str--;
+		*(char *)str = *(char *)src;
 	}
-	ft_putbuf(buffer);
+	return (dst);
+}
+
+void		*ft_memmove(void *dst, const void *src, size_t len)
+{
+	if (dst > src)
+		ft_rmemcpy(dst, src, len);
+	else
+		ft_memcpy(dst, src, len);
+	return (dst);
 }

@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getf.c                                          :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 11:07:45 by cbinet            #+#    #+#             */
-/*   Updated: 2017/01/04 16:37:49 by cbinet           ###   ########.fr       */
+/*   Created: 2016/11/04 22:14:56 by cbinet            #+#    #+#             */
+/*   Updated: 2016/11/12 20:54:13 by cbinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	ft_getf(t_buf_f *buffer, va_list ap, char *format)
+void	ft_putendl(char const *s)
 {
-	int	i;
+	int i;
 
-	i = 0;
-	while (*format)
+	if (s)
 	{
-		while (format[i] != '%' && format[i] && format[i] != '{')
-			i++;
-		ft_buffit(buffer, format, i);
-		format += i;
 		i = 0;
-		if (*format)
+		while (s[i])
 		{
-			if (format[i] != '{')
-				format++;
-			format = convarg(buffer, ap, format);
+			ft_putchar(s[i]);
+			i++;
 		}
+		ft_putchar('\n');
 	}
-	ft_putbuf(buffer);
 }
