@@ -167,7 +167,6 @@ If no l modifier is present: the const char * argument is
               present; if the precision is not specified, or is greater than
               the size of the array, the array must contain a terminating
               null byte.
-
               If an l modifier is present: the const wchar_t * argument is
               expected to be a pointer to an array of wide characters.  Wide
               characters from the array are converted to multibyte
