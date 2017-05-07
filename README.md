@@ -27,7 +27,7 @@ command ft_printf as 42 project.
 ##        Flag characters
        The character % is followed by zero or more of the following flags:
 
-###       #
+###       \#
 The value should be converted to an "alternate form".  For o
               conversions, the first character of the output string is made
               zero (by prefixing a 0 if it was not zero already).  For x and
