@@ -95,7 +95,7 @@ An optional precision, in the form of a period ('.')  followed by an
        from a string for s and S conversions.
 
 ###   Length modifier
-    Here, "integer conversion" stands for d, i, o, u, x, or X conversion.
+ Here, "integer conversion" stands for d, i, o, u, x, or X conversion.
 
 ####       hh
 A following integer conversion corresponds to a signed char or
