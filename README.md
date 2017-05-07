@@ -4,18 +4,17 @@ command ft_printf as 42 project.
 
 
 ##  Name
-ft_printf - formatted write
+    ft_printf - formatted write
 
 ##  Synopsys
-  #include "ft_printf.h"
-
-  ft_printf(const char *format, ...);
+    #include "ft_printf.h"
+    ft_printf(const char *format, ...);
   
 ##  Description
- The function ft_printf() write output to stdout, the standard output stream;
+     The function ft_printf() write output to stdout, the standard output stream;
        
 ##  Format of the format string
-       The format string is a character string, beginning and ending in its
+      The format string is a character string, beginning and ending in its
        initial shift state, if any.  The format string is composed of zero
        or more directives: ordinary characters (not %), which are copied
        unchanged to the output stream; and conversion specifications, each
@@ -29,7 +28,7 @@ ft_printf - formatted write
        The character % is followed by zero or more of the following flags:
 
 ###       #
-       The value should be converted to an "alternate form".  For o
+The value should be converted to an "alternate form".  For o
               conversions, the first character of the output string is made
               zero (by prefixing a 0 if it was not zero already).  For x and
               X conversions, a nonzero result has the string "0x" (or "0X"
@@ -42,7 +41,7 @@ ft_printf - formatted write
               conversions, the result is undefined.
 
 ###       0
-       The value should be zero padded.  For d, i, o, u, x, X, a, A,
+ The value should be zero padded.  For d, i, o, u, x, X, a, A,
               e, E, f, F, g, and G conversions, the converted value is
               padded on the left with zeros rather than blanks.  If the 0
               and - flags both appear, the 0 flag is ignored.  If a
@@ -51,24 +50,24 @@ ft_printf - formatted write
               behavior is undefined.
 
 ###       -
-       The converted value is to be left adjusted on the field
+ The converted value is to be left adjusted on the field
               boundary.  (The default is right justification.)  The
               converted value is padded on the right with blanks, rather
               than on the left with blanks or zeros.  A - overrides a 0 if
               both are given.
 
 ###       ' '
-       (a space) A blank should be left before a positive number (or
+(a space) A blank should be left before a positive number (or
               empty string) produced by a signed conversion.
 
 ###       +
-       A sign (+ or -) should always be placed before a number
+A sign (+ or -) should always be placed before a number
               produced by a signed conversion.  By default, a sign is used
               only for negative numbers.  A + overrides a space if both are
               used.
 
 ### Field width
-       An optional decimal digit string (with nonzero first digit)
+An optional decimal digit string (with nonzero first digit)
        specifying a minimum field width.  If the converted value has fewer
        characters than the field width, it will be padded with spaces on the
        left (or right, if the left-adjustment flag has been given).  Instead
@@ -82,7 +81,7 @@ ft_printf - formatted write
        contain the conversion result.
 
 ###    Precision
-       An optional precision, in the form of a period ('.')  followed by an
+An optional precision, in the form of a period ('.')  followed by an
        optional decimal digit string.  Instead of a decimal digit string one
        may write "*" or "*m$" (for some decimal integer m) to specify that
        the precision is given in the next argument, or in the m-th argument,
@@ -96,7 +95,7 @@ ft_printf - formatted write
        from a string for s and S conversions.
 
 ###   Length modifier
-       Here, "integer conversion" stands for d, i, o, u, x, or X conversion.
+    Here, "integer conversion" stands for d, i, o, u, x, or X conversion.
 
 ####       hh
 A following integer conversion corresponds to a signed char or
@@ -104,7 +103,7 @@ A following integer conversion corresponds to a signed char or
               corresponds to a pointer to a signed char argument.
 
 ####       h
-       A following integer conversion corresponds to a short int or
+A following integer conversion corresponds to a short int or
               unsigned short int argument, or a following n conversion
               corresponds to a pointer to a short int argument.
 
@@ -128,7 +127,7 @@ A following integer conversion corresponds to a size_t or
               pointer to a size_t argument.
               
 ###  Conversion specifiers
-       A character that specifies the type of conversion to be applied.  The
+A character that specifies the type of conversion to be applied.  The
        conversion specifiers and their meanings are:
 
 ####       d, i
@@ -140,7 +139,7 @@ The int argument is converted to signed decimal notation.  The
               empty.
 
 ####       o, u, x, X
-              The unsigned int argument is converted to unsigned octal (o),
+ The unsigned int argument is converted to unsigned octal (o),
               unsigned decimal (u), or unsigned hexadecimal (x and X)
               notation.  The letters abcdef are used for x conversions; the
               letters ABCDEF are used for X conversions.  The precision, if
@@ -187,17 +186,17 @@ If no l modifier is present: the const char * argument is
               array is reached.
 
   ####     C      
-       Synonym for lc.
+Synonym for lc.
 
 ####       S     
-       Synonym for ls.
+Synonym for ls.
 
 ####       p      
-       The void * pointer argument is printed in hexadecimal (as if
+The void * pointer argument is printed in hexadecimal (as if
               by %#x or %#lx).
 
 ####       n      
-       The number of characters written so far is stored into the
+The number of characters written so far is stored into the
               integer pointed to by the corresponding argument.  That
               argument shall be an int *, or variant whose size matches the
               (optionally) supplied integer length modifier.  No argument is
@@ -208,6 +207,6 @@ A '%' is written.  No argument is converted.  The complete
               conversion specification is '%%'.
               
               
-              ## RETURN VALUE
-              return the number of characters printed
+## RETURN VALUE
+return the number of characters printed
               
