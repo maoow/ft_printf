@@ -1,5 +1,5 @@
 # ft_printf
-command ft_printf as 42 project.
+function ft_printf as 42 project.
 # __________________________________________________________________
 
 
