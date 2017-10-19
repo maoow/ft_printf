@@ -1,7 +1,6 @@
 # ft_printf
 function ft_printf as 42 project.
-# __________________________________________________________________
-
+#
 
 ##  Name
     ft_printf - formatted write
